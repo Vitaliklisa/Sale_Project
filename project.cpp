@@ -39,14 +39,16 @@ string entry;
   tries--;
  }
 
- if ( entry == pin )
+ if ( entry == pin ) {
   cout << "\nPIN is approved. Here is our menu!" << endl;
   menu();
-  
- else if ( tries <= max_tries )
+ }
+   
+ else if ( tries <= max_tries ) {
   cout << "\nYou are out of attempts :( " << endl;
-
-// the we did another function for menu but we put it before main fuction for it to run properly
+ }
+// the we did another function for menu but we put it before main fuction for it to run properly 
+//and then add a vector and while loop to ask the customer what dishes they want and the number of the dishes they expect
 }
 
 
