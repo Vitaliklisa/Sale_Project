@@ -47,6 +47,24 @@ string entry;
  else if ( tries <= max_tries ) {
   cout << "\nYou are out of attempts :( " << endl;
  }
+  
+  vector<int> order; // To store the meals ordered
+	float subtotal = 0.0;
+	const float prices[] = {8.00, 6.50, 3.99, 4.99, 7.50};
+	int choice = -1;
+
+	while (choice != 0) {
+		cout << "\nSelect a item by its number 0 to exit. ";
+		cin >> choice;
+
+		if (choice > 0 && choice <= 5) {
+			order.push_back(choice);
+			cout << "Added to your order!" << endl;
+		} else if (choice != 0) {
+			cout << "Invalid choice, please select a valid menu item." << endl;
+
+		}
+	}
 // the we did another function for menu but we put it before main fuction for it to run properly 
 //and then add a vector and while loop to ask the customer what dishes they want and the number of the dishes they expect
 }
