@@ -1,4 +1,5 @@
 //Dasha Podolska, Vitalii Khomenko and Antik 
+//This code was made on online GDB
 
 #include <iostream>
 #include <vector>
@@ -22,7 +23,7 @@ int main() {
 	cout << "     Welcome to our restaurant 'Puzata Hata'!" << endl;
 	cout << "***************************************************" << endl;
 
-	//then, we created code to ask the customer for PIN to access the menu of our restaurant:
+//then, we created code to ask the customer for PIN to access the menu of our restaurant:
 
 	string pin = "ICS4U1";
 	int tries = 3;
@@ -50,12 +51,14 @@ int main() {
 	else if ( tries <= max_tries ) {
 		cout << "\nYou are out of attempts :( " << endl;
 	}
+//then we did another function for menu but we put it before main fuction for it to run properly 
+//after that we added a vector and while loop to ask the customer what dishes they want
 
-//then we added a vector and while loop to ask the customer what dishes they want
-    vector<int> order; // To store the meals ordered
-    vector<int> portions_added; // To store how many portions has been ordered for each item
+    vector<int> order;               // To store the meals ordered
+    vector<int> portions_added;     // To store how many portions has been ordered for each item
     float subtotal = 0.00;
     const float prices[] = {8.00, 6.50, 3.99, 4.99, 7.50};
+    string menu[] = {"Pierogi with potato and cheese", "Borscht", "Compot", "The Monastic Hut", "Poppyseed Roll"};
     int choice = -1;
     int portions;
 	
@@ -70,8 +73,10 @@ int main() {
 		if (choice > 0 && choice <= 5) {
 			cout << "How many portions do you want to add? Choose 0 to delete this dish from your order." << endl;
 			cin >> portions;
+			
 // after we made a code for choosing dishes, we add an if statement for our customers to choose how meny portions of that dish they want
 // if they choose 0, they will delete this dish from the receipt and they won't get it
+
             if (portions > 0) {
                 order.push_back(choice);
                 portions_added.push_back(portions);
@@ -83,8 +88,8 @@ int main() {
                 for (int i = 0; i < order.size(); ++i) {
                     if (order[i] == choice) {
                         subtotal -= prices[choice - 1] * portions_added[i]; 
-                        order.erase(order.begin() + i); // Remove the dish from order
-                        portions_added.erase(portions_added.begin() + i); // Remove the corresponding portion
+                        order.erase(order.begin() + i);                     // Remove the dish from order
+                        portions_added.erase(portions_added.begin() + i);  // Remove the corresponding portion
                         break;
                     }
                 }
@@ -95,21 +100,31 @@ int main() {
 
             cout << "Invalid output. Please enter the right number." << endl;
         }
-
+        
+//also we made a code for customers to see how much they will pay for each dish with the number of potions they add
+//so after they add one dish to their order they will see the price for the number of portions they chose
+        
         cout << "\nCurrent Order: " << endl;
         for (int i = 0; i < order.size(); ++i) {
             cout << "Meal " << order[i] << " x " << portions_added[i] << " = $" << fixed << setprecision(2) << prices[order[i] - 1] * portions_added[i] << endl; //display the items  which has been ordered 
         }
-
+        
         cout << "\nWould you like to add or remove another item (1-yes, 0-exit)? ";
         int continue_choice;
         cin >> continue_choice;
         if (continue_choice == 0) {
             break;
         }
+        else if (continue_choice == 1) {
+            continue;
+        }
+        else {
+            cout << "Invalid choice! Please press 1 to continue ordering or 0 to finish the order and get the receipt." << endl;
+        }
 
 
     }
+// then we added a seating type: Dine-In, Take-Out and Delivery. Also there is a choice to cancel the order
 
     int seating_type;
     double total;
@@ -134,7 +149,7 @@ int main() {
         }
         else if(seating_type == 3){
             if (subtotal < 25) {
-                subtotal += 3.5;
+                int delivery_fee = 3.50;
             }            
             total = subtotal + (subtotal * .13);
             break;
@@ -143,15 +158,37 @@ int main() {
             cout << "Ordered has been cancelled. " << endl;
             return(0);
         } else {
-            cout << "Invalid ";
+            cout << "Invalid " << endl;
         }
     }
 
+//and after all this work we finaly made a design of our receipt which our customers will see after they made the order
 
-    
+    cout << "\n*******************************************************" << endl;
+    cout << "                        RECEIPT                        " << endl;
+    cout << "*******************************************************" << endl;
+    cout << "Items ordered:\n";
+        for (int i = 0; i < 5; i++) {
+            if (subtotal > 0) {
+            cout << menu[i] << " - $" << fixed << setprecision(2) << prices[i] << endl;
+            subtotal -= prices[i];
+            }
+        }
 
-    cout << "\nSubtotal: $"<< subtotal << fixed << setprecision(2) << endl;
-    cout << "Total: $"<< total << fixed << setprecision(2) << endl;
-// the we did another function for menu but we put it before main fuction for it to run properly 
+    cout << "\n----------------------------------------\n";
+    cout << "Subtotal: $" << fixed << setprecision(2) << subtotal << endl;
 
+    if (seating_type == 2) {
+        cout << "Discount (10%): -$" << fixed << setprecision(2) << reduced << endl;
+    }
+    if (seating_type == 3) {
+        cout << "Delivery fee: $" << fixed << setprecision(2) << delivery_fee << endl;
+    }
+
+    cout << "Tax (13%): $" << fixed << setprecision(2) << (subtotal * .13) << endl;
+    cout << "Total: $" << fixed << setprecision(2) << total << endl;
+
+    cout << "========================================\n";
+
+    return 0;
 }
