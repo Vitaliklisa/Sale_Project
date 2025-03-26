@@ -134,12 +134,13 @@ int main() {
    break;
   }
   else if(seating_type == 3) {
-   if (subtotal < 25) {
-    int delivery_fee = 3.50;
+    if (subtotal < 25) {
+      total = subtotal + (subtotal * .13) + 3.5;
+   } else {
+      total = subtotal + (subtotal * .13);
    }
-   total = subtotal + (subtotal * .13);
    break;
-  }
+ }
   else if(seating_type == 4) {
    cout << "Ordered has been cancelled. " << endl;
    return(0);
@@ -156,17 +157,17 @@ int main() {
 
  cout << "Items ordered:\n" << endl;
  for (int i = 0; i < order.size(); ++i) {
-  cout << portions_added[i] << " " << menu[order[i] - 1]
+    cout << portions_added[i] << " " << menu[order[i] - 1]
        << " - $" << fixed << setprecision(2) << prices[order[i] - 1] * portions_added[i] << endl;
  }
- cout << "\n------------------------------------------------\n";
+    cout << "\n------------------------------------------------\n";
 
- cout << "Subtotal: \t\t$" << fixed << setprecision(2) << subtotal << endl;
+    cout << "Subtotal: \t\t$" << fixed << setprecision(2) << subtotal << endl;
  if (seating_type == 2) {
-  cout << "Discount (10%): \t-$" << fixed << setprecision(2) << subtotal * 0.10 << endl;
+    cout << "Discount (10%): \t-$" << fixed << setprecision(2) << subtotal * 0.10 << endl;
  }
  if (seating_type == 3 && subtotal < 25) {
-  cout << "Delivery fee: \t\t$3.50" << endl;
+    cout << "Delivery fee: \t\t$3.50" << endl;
  }
  cout << "Tax (13%): \t\t$" << fixed << setprecision(2) << subtotal * 0.13 << endl;
  cout << "Total: \t\t\t\t$" << fixed << setprecision(2) << total << endl;
@@ -174,3 +175,16 @@ int main() {
  cout << "     Thank you for ordering in Puzata Hata!" << endl;
  return 0;
 }
+
+// REFLECTION OF THE GROUP PROJECT
+
+// The hardest thing we encountered while we were making the whole project was how to call
+// another menu function in the main function and it was a little complicated to make vectors work. 
+// There were only a few small mistakes but we still spent a lot of time figuring out what was wrong. 
+// The functions for our project were something crazy, being Antik, he would never have figured it out in his life, 
+// because he was too lazy, there were so many of these. These eternal loops were hard for him to make, but he did it 
+// and it works. Dasha is incredibly cool, she made the best design in the world, the menu was like in a 3 Michelin star 
+// restaurant, these unreal sticks, stars, spaces and other things reflected the face of my ideal being in the world. 
+// Antik spent the most time finding the error, the condition itself was correct and it was executed, but when the number was entered incorrectly,
+// the function simply collapsed to hell. It was freaking awesome to program Dine-In, Take-Out and Delivery math operation, 
+// that was the easiest part, I tell you.   (Written by Antik)
